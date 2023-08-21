@@ -15,6 +15,8 @@ RUN apk add php8 \
     php8-xml \
     php8-zip \
     wget \
+    curl \
+    composer \
     unzip; \
     sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php8/php-fpm.d/www.conf; \
     sed -i "s|;listen.owner = nobody|listen.owner = nobody|g" /etc/php8/php-fpm.d/www.conf; \
