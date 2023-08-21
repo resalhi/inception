@@ -2,7 +2,7 @@ FROM alpine:3.16
 
 EXPOSE 3306
 
-RUN apk update && apk add mariadb mariadb-client
+RUN apk update && apk add --no-cache mariadb mariadb-client
 
 RUN mkdir -p /run/mysqld; \
     chmod 777 /run/mysqld; \

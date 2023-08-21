@@ -5,10 +5,10 @@ services:
       context: .
       dockerfile: requirements/mariadb/Dockerfile
     container_name: mariadb
-    # ports:
-    #   - "3306:3306"
     networks:
       - inception
+    env_file:
+      - .env
     restart: always
   nginx:
     build: 
@@ -23,7 +23,8 @@ services:
       - inception
     depends_on:
       - wordpress
-    env_file: .env
+    env_file:
+      - .env
     ports:
       - "443:443"
     restart: on-failure
@@ -32,16 +33,15 @@ services:
       context: .
       dockerfile: requirements/wordpress/Dockerfile
     container_name: wordpress
-    env_file: .env
+    env_file:
+      - .env
     # volumes:
     #   - wordpress:/var/www/
     networks:
       - inception
     depends_on:
       - mariadb
-    restart: on-failure
-    # expose: 
-    #   - "9000"
+    restart: always
 networks:
     inception:
         driver: bridge
