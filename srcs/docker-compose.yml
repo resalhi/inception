@@ -10,15 +10,13 @@ services:
     env_file:
       - .env
     restart: always
+    volumes:
+      - mariadb_data:/var/lib/mysql
   nginx:
     build: 
       context: .
       dockerfile: requirements/nginx/Dockerfile
     container_name: nginx
-    # volumes:
-    #   - ./requirements/nginx/conf/:/etc/nginx/http.d/
-    #   - ./requirements/nginx/tools:/etc/nginx/ssl/
-    #   - wp-volume:/var/www/
     networks:
       - inception
     depends_on:
@@ -35,13 +33,16 @@ services:
     container_name: wordpress
     env_file:
       - .env
-    # volumes:
-    #   - wordpress:/var/www/
     networks:
       - inception
     depends_on:
       - mariadb
     restart: always
+    volumes:
+      - wordpress_files:/var/www/
 networks:
     inception:
         driver: bridge
+volumes:
+  mariadb_data:
+  wordpress_files:
