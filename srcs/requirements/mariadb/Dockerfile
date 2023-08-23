@@ -1,8 +1,8 @@
-FROM alpine:3.16
+FROM alpine:3.14
 
 EXPOSE 3306
 
-RUN apk update && apk add --no-cache mariadb mariadb-client
+RUN apk update && apk add mariadb mariadb-client
 
 RUN mkdir -p /run/mysqld; \
     chmod 777 /run/mysqld; \
@@ -16,4 +16,4 @@ RUN sed -i 's/skip-networking/#skip-networking/g' /etc/my.cnf.d/mariadb-server.c
 
 COPY requirements/mariadb/conf/create_db.sh .
 
-CMD sh create_db.sh
+CMD ["sh", "create_db.sh"]

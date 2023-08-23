@@ -1,31 +1,28 @@
-FROM alpine:3.16
+FROM alpine:3.14
 
 RUN apk update && apk upgrade
 
-RUN apk add php8 \
-    php8-fpm \
-    php8-mysqli \
-    php8-json \
-    php8-curl \
-    php8-dom \
-    php8-exif \
-    php8-fileinfo \
-    php8-mbstring \
-    php8-openssl \
-    php8-xml \
-    php8-zip \
+RUN apk add php7 \
+    php7-fpm \
+    php7-mysqli \
+    php7-pdo_mysql \
+    php7-phar \
+    php7-json \
+    php7-openssl \
+    php7-curl \
+    php7-zlib \
+    php7-mbstring \
     wget \
     curl \
     composer \
-    unzip; \
-    sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php8/php-fpm.d/www.conf; \
-    sed -i "s|;listen.owner = nobody|listen.owner = nobody|g" /etc/php8/php-fpm.d/www.conf; \
-    sed -i "s|;listen.group = nobody|listen.group = nobody|g" /etc/php8/php-fpm.d/www.conf
-
-WORKDIR /var/www
-
-EXPOSE 9000
+    unzip
 
 COPY requirements/wordpress/conf/wp-config-create.sh .
 
-CMD ["sh", "wp-config-create.sh"]
+RUN mkdir -p /var/www/html
+
+WORKDIR /var/www/html
+
+EXPOSE 9000
+
+CMD ["sh", "/./wp-config-create.sh"]
