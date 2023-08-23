@@ -4,13 +4,11 @@ sleep 2
 
 cd /var/www/html
 
-sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli-nightly.phar
+chmod +x /var/www/html/wp-cli.phar
 
-chmod +x /var/www/html/wp-cli-nightly.phar
-
-mv /var/www/html/wp-cli-nightly.phar /usr/local/bin/wp
+mv /var/www/html/wp-cli.phar /usr/local/bin/wp
 
 wp core download --force --allow-root
 
@@ -24,12 +22,5 @@ sed -i "s/localhost/mariadb/1" /var/www/html/wp-config.php
 wp core install --url=$DOMAIN_NAME --title=$WP_TITLE --admin_user=$WP_TITLE --admin_password=$DB_PASS --admin_email=$WP_ADMIN_EMAIL --skip-email --allow-root
 
 wp user create $DB_USER $WP_ADMIN_EMAIL --role=author --user_pass=$DB_PASS --allow-root
-
-chmod -R 777 /var/www/html/
-chmod -R 777 /var/www/html/wp-content
-chmod -R 777 /var/www/html/wp-admin
-chmod -R 777 /var/www/html/wp-includes
-
-# mkdir -p /run/php
 
 /usr/sbin/php-fpm7 -F -R
