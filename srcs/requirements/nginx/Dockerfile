@@ -7,8 +7,8 @@ RUN mkdir -p /etc/nginx/ssl
 COPY requirements/nginx/tools/ressalhi.crt /etc/nginx/ssl/
 COPY requirements/nginx/tools/ressalhi.key /etc/nginx/ssl/
 
-COPY requirements/nginx/conf/nginx.conf /etc/nginx/
+COPY requirements/nginx/conf/nginx.conf /etc/nginx/http.d/default.conf
 
-EXPOSE 443
+# EXPOSE 8443
 
 CMD [ "nginx", "-g", "daemon off;" ]

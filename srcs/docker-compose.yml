@@ -39,7 +39,7 @@ services:
       - mariadb
     restart: always
     volumes:
-      - wordpress_files:/var/www/
+      - wordpress_files:/var/www/html
 networks:
     inception:
         driver: bridge

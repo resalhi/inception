@@ -25,5 +25,7 @@ fclean:
 	@docker system prune -af
 	@docker network prune --force
 	@docker volume prune -f
+	@docker volume rm srcs_wordpress_files
+	@docker volume rm srcs_mariadb_data
 
 .PHONY	: all build down re clean fclean
