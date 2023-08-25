@@ -20,6 +20,4 @@ wp core install --url=$DOMAIN_NAME --title=$WP_TITLE --admin_user=$WP_TITLE --ad
 
 wp user create $DB_USER $WP_ADMIN_EMAIL --role=author --user_pass=$DB_PASS --allow-root
 
-# chmod -R 777 /var/www/html/
-
 /usr/sbin/php-fpm7 -F -R
