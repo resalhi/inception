@@ -6,7 +6,6 @@ RUN apk add php7 \
     php7-fpm \
     php7-mysqli \
     php7-phar \
-    wget \
     curl \
     composer \
     unzip && sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf
