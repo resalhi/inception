@@ -4,13 +4,11 @@ cd /var/www/html
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 chmod +x wp-cli.phar
-
 mv wp-cli.phar /usr/local/bin/wp
 
 wp core download
 
 mv wp-config-sample.php wp-config.php
-
 sed -i "s/database_name_here/$DB_NAME/1" wp-config.php
 sed -i "s/username_here/$WP_USER/1" wp-config.php
 sed -i "s/password_here/$DB_PASS/1" wp-config.php

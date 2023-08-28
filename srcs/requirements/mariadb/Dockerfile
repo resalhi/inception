@@ -12,7 +12,7 @@ RUN mkdir -p /run/mysqld; \
     chown -R mysql:mysql /var/lib/mysql
 
 RUN sed -i 's/skip-networking/#skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf; \
-   sed -i 's/#bind-address=0.0.0.0/bind-address=0.0.0.0/g' /etc/my.cnf.d/mariadb-server.cnf
+    sed -i 's/#bind-address=0.0.0.0/bind-address=0.0.0.0/g' /etc/my.cnf.d/mariadb-server.cnf
 
 COPY requirements/mariadb/conf/create_db.sh .
 

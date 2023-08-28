@@ -1,5 +1,5 @@
 services:
-
+# mariadb section
   mariadb:
     build:
       context: .
@@ -12,6 +12,7 @@ services:
     restart: always
     volumes:
       - mariadb_data:/var/lib/mysql
+# nginx section
   nginx:
     build: 
       context: .
@@ -28,6 +29,7 @@ services:
     volumes:
       - wordpress_files:/var/www/html
     restart: on-failure
+# wordpress section
   wordpress:
     build: 
       context: .
@@ -42,9 +44,11 @@ services:
     restart: always
     volumes:
       - wordpress_files:/var/www/html
+# network section
 networks:
     inception:
         driver: bridge
+# volumes section
 volumes:
   mariadb_data: 
     driver: local
